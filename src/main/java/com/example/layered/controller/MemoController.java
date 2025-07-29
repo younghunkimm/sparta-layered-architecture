@@ -42,4 +42,10 @@ public class MemoController {
 
         return new ResponseEntity<>(memoService.findAllMemos(), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MemoResponseDto> findMemoById(@PathVariable Long id) {
+
+        return new ResponseEntity<>(memoService.findMemoById(id), HttpStatus.OK);
+    }
 }
