@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MemoRepository {
 
-    Memo saveMemo(Memo memo);
+    MemoResponseDto saveMemo(Memo memo);
 
     List<MemoResponseDto> findAllMemos();
 

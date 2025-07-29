@@ -32,9 +32,7 @@ public class MemoServiceImpl implements MemoService {
         Memo memo = new Memo(dto.getTitle(), dto.getContents());
 
         // DB 저장
-        Memo savedMemo = memoRepository.saveMemo(memo);
-
-        return new MemoResponseDto(savedMemo);
+        return memoRepository.saveMemo(memo);
     }
 
     @Override
