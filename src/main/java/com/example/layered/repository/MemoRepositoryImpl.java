@@ -49,4 +49,10 @@ public class MemoRepositoryImpl implements MemoRepository {
 
         return memoList.get(id);
     }
+
+    @Override
+    public void deleteMemo(Long id) {
+
+        memoList.remove(id);
+    }
 }

@@ -12,4 +12,7 @@ public interface MemoRepository {
     List<MemoResponseDto> findAllMemos();
 
     Memo findMemoById(Long id);
+
+    void deleteMemo(Long id);
+
 }

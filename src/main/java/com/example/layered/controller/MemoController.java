@@ -66,4 +66,13 @@ public class MemoController {
 
         return new ResponseEntity<>(memoService.updateTitle(id, dto.getTitle(), dto.getContents()), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMemo(@PathVariable Long id) {
+
+        memoService.deleteMemo(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
