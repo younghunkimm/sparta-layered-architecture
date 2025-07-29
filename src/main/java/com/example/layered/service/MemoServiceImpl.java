@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <p>Annotation @Service는 @Component와 같다, Spring Bean으로 등록한다는 뜻.</p>
@@ -46,15 +45,9 @@ public class MemoServiceImpl implements MemoService {
     @Override
     public MemoResponseDto findMemoById(Long id) {
 
-        // 식별자의 Memo가 없다면?
-        Optional<Memo> optionalMemo = memoRepository.findMemoById(id);
+        Memo memo = memoRepository.findMemoByIdOrElseThrow(id);
 
-        // NPE 방지
-        if (optionalMemo.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
-        }
-
-        return new MemoResponseDto(optionalMemo.get());
+        return new MemoResponseDto(memo);
     }
 
     @Transactional
@@ -71,11 +64,12 @@ public class MemoServiceImpl implements MemoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
         }
 
-        Optional<Memo> optionalMemo = memoRepository.findMemoById(id);
+        Memo memo = memoRepository.findMemoByIdOrElseThrow(id);
 
-        return new MemoResponseDto(optionalMemo.get());
+        return new MemoResponseDto(memo);
     }
 
+    @Transactional
     @Override
     public MemoResponseDto updateTitle(Long id, String title, String contents) {
 
@@ -89,9 +83,9 @@ public class MemoServiceImpl implements MemoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
         }
 
-        Optional<Memo> optionalMemo = memoRepository.findMemoById(id);
+        Memo memo = memoRepository.findMemoByIdOrElseThrow(id);
 
-        return new MemoResponseDto(optionalMemo.get());
+        return new MemoResponseDto(memo);
     }
 
     @Override
